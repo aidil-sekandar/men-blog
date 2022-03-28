@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>Blog Post</title>
+  </head>
+  <body>
+    <%- include("./components/header.ejs") %>
+
+    <h1>Blogs</h1>
+    <% articles.forEach(article => { %>
+    <div style="border: 2px solid rgb(124, 124, 124); max-width: 600px; padding: 0.5em; border-radius: 5px">
+      <h2 style="margin: 0 0 0.5em 0"><%= article.title %></h2>
+      <h4 style="margin: 0 0 0.5em 0"><%= article.author %></h4>
+      <p style="margin: 0 0 0.5em 0"><%= article.blogpost %></p>
+      <a href="/blog/<%= article.slug %>">Read more</a>
+      <a href="/blog/edit/<%= article.slug %> ">Edit Post</a>
+      <form action="/blog/<%= article.id %>?_method=DELETE" method="post">
+        <button>Delete</button>
+      </form>
+    </div>
+    <br />
+    <% }); %> <%- include("./components/footer.ejs") %>
+  </body>
+</html>

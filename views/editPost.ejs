@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/style.css" />
+    <title>edit - <%- article.title %></title>
+  </head>
+  <body>
+    <%- include("./components/header.ejs") %>
+
+    <h1>Edit: <%= article.title %></h1>
+    <form action="/blog/api/edit/<%= article.slug %>?_method=PUT" id="form" method="POST">
+      <input type="text" name="title" spellcheck="false" placeholder="Title" value="<%= article.title %> " required autocomplete="off" />
+      <br />
+      <input type="text" name="author" placeholder="author" spellcheck="false" value="<%= article.author %>"" required autocomplete="off" />
+      <br />
+      <textarea name="blogpost" cols="60" rows="5" placeholder="write your blogpost..." required><%= article.blogpost %></textarea>
+      <br />
+      <input type="text" name="slug" placeholder="slug" spellcheck="false" value="<%= article.slug %> " required autocomplete="off" />
+      <br />
+      <button type="submit">edit</button>
+    </form>
+
+    <%- include("./components/footer.ejs") %>
+  </body>
+</html>
