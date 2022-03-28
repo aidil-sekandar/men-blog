@@ -1,14 +1,14 @@
 const blogModel = require("../models/blogModel");
 
 module.exports = {
-  get_blogposts: async (req, res) => {
+  showAllArticles: async (req, res) => {
     const articles = await blogModel.find();
     res.status(200).render("blog.ejs", { articles });
   },
-  get_postBlogPage: (req, res) => {
-    res.status(200).render("postBlog.ejs");
+  showPostArticlePage: (req, res) => {
+    res.status(200).render("postArticle.ejs");
   },
-  post_newBlog: async (req, res) => {
+  postNewArticle: async (req, res) => {
     let article = new blogModel({
       title: req.body.title,
       blogpost: req.body.blogpost,
@@ -22,21 +22,21 @@ module.exports = {
       res.send(err);
     }
   },
-  get_post: async (req, res) => {
+  showArticlePage: async (req, res) => {
     const article = await blogModel.findOne({ slug: req.params.slug });
-    res.render("blogpost.ejs", { article });
+    res.render("articlePage.ejs", { article });
   },
-  delete_post: async (req, res) => {
+  deleteArticle: async (req, res) => {
     const id = req.params.id;
     await blogModel.findByIdAndDelete(id);
 
     res.redirect("/blog");
   },
-  get_editBlogPost: async (req, res) => {
+  showEditArticlePage: async (req, res) => {
     const article = await blogModel.findById(req.params.id);
-    res.render("editPost.ejs", { article });
+    res.render("editArticle.ejs", { article });
   },
-  put_editBlogPost: async (req, res) => {
+  updateEditedArticle: async (req, res) => {
     let article = await blogModel.findOne({ slug: req.params.slug });
     article.title = req.body.title;
     article.author = req.body.author;
