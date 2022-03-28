@@ -17,7 +17,7 @@
       <h4 style="margin: 0 0 0.5em 0"><%= article.author %></h4>
       <p style="margin: 0 0 0.5em 0"><%= article.blogpost %></p>
       <a href="/blog/<%= article.slug %>">Read more</a>
-      <a href="/blog/edit/<%= article.slug %> ">Edit Post</a>
+      <a href="/blog/edit/<%= article.id %> ">Edit Post</a>
       <form action="/blog/<%= article.id %>?_method=DELETE" method="post">
         <button>Delete</button>
       </form>

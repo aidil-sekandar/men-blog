@@ -33,15 +33,14 @@ module.exports = {
     res.redirect("/blog");
   },
   get_editBlogPost: async (req, res) => {
-    const article = await blogModel.findOne({ slug: req.params.slug });
-    res.render("editPost.ejs", { article, selected: "true" });
+    const article = await blogModel.findById(req.params.id);
+    res.render("editPost.ejs", { article });
   },
   put_editBlogPost: async (req, res) => {
-    req.article = await blogModel.findOne({ slug: req.params.slug });
-    let article = req.article;
+    let article = await blogModel.findOne({ slug: req.params.slug });
     article.title = req.body.title;
     article.author = req.body.author;
-    articles.blogpost = req.body.blogpost;
+    article.blogpost = req.body.blogpost;
     article.slug = req.body.slug;
     try {
       article = await article.save();
